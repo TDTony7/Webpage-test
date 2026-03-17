@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="format-detection" content="telephone=no,email=no,address=no">
+    <title>全球新闻周报 | 2026年3月10日-17日</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: rgba(0,0,0,0);
+            -webkit-text-size-adjust: 100%;
+        }
+
+        :root {
+            --primary: #1E2761;
+            --secondary: #CADCFC;
+            --accent: #E94560;
+            --bg-light: #F5F7FA;
+            --text-dark: #2D3748;
+            --text-gray: #4A5568;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+            background: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, #2a3a7d 100%);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            position: relative;
+        }
+
+        .header .subtitle {
+            font-size: 1rem;
+            letter-spacing: 4px;
+            color: var(--secondary);
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .header .date {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            position: relative;
+        }
+
+        /* Navigation Tabs */
+        .nav-container {
+            background: white;
+            position: -webkit-sticky;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            -webkit-overflow-scrolling: touch;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .nav-tabs {
+            display: -webkit-flex;
+            display: flex;
+            justify-content: center;
+            -webkit-flex-wrap: wrap;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 10px;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .nav-tab {
+            padding: 16px 20px;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--text-gray);
+            white-space: nowrap;
+        }
+
+        .nav-tab:hover {
+            color: var(--primary);
+            background: var(--bg-light);
+        }
+
+        .nav-tab.active {
+            color: var(--accent);
+            border-bottom-color: var(--accent);
+            font-weight: 600;
+        }
+
+        /* Main Content */
+        .main-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Section */
+        .section {
+            display: none;
+            -webkit-animation: fadeIn 0.4s ease;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @-webkit-keyframes fadeIn {
+            from { opacity: 0; -webkit-transform: translateY(10px); transform: translateY(10px); }
+            to { opacity: 1; -webkit-transform: translateY(0); transform: translateY(0); }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .section-number {
+            background: var(--primary);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-right: 15px;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        /* Trend Summary Box */
+        .trend-box {
+            background: linear-gradient(135deg, #FEF3C7 0%, #FDE68A 100%);
+            border-left: 4px solid #F59E0B;
+            border-radius: 0 12px 12px 0;
+            padding: 20px 25px;
+            margin-bottom: 30px;
+        }
+
+        .trend-box h3 {
+            color: #92400E;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .trend-box h3::before {
+            content: '📊';
+            margin-right: 8px;
+        }
+
+        .trend-box p {
+            color: #78350F;
+            font-size: 0.95rem;
+        }
+
+        /* Data Cards */
+        .data-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .data-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px 15px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-top: 4px solid var(--primary);
+        }
+
+        .data-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .data-card .label {
+            font-size: 0.85rem;
+            color: var(--text-gray);
+            margin-bottom: 8px;
+        }
+
+        .data-card .value {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+
+        .data-card .change {
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .data-card .change.positive { color: #16A34A; }
+        .data-card .change.negative { color: var(--accent); }
+        .data-card .change.neutral { color: var(--text-gray); }
+
+        /* News Items */
+        .news-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .news-item {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            border-left: 4px solid var(--accent);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .news-item:hover {
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            transform: translateX(5px);
+        }
+
+        .news-item h4 {
+            font-size: 1.1rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .news-item h4::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--accent);
+            border-radius: 50%;
+            margin-right: 12px;
+            margin-top: 7px;
+            flex-shrink: 0;
+        }
+
+        .news-item p {
+            color: var(--text-gray);
+            font-size: 0.95rem;
+            padding-left: 20px;
+        }
+
+        .news-item .impact {
+            margin-top: 12px;
+            padding: 10px 15px;
+            background: var(--bg-light);
+            border-radius: 8px;
+            font-size: 0.9rem;
+            color: var(--text-dark);
+            margin-left: 20px;
+        }
+
+        .news-item .impact::before {
+            content: '💡 影响分析：';
+            font-weight: 600;
+        }
+
+        /* Cross Analysis Section */
+        .cross-analysis {
+            background: linear-gradient(135deg, var(--primary) 0%, #2a3a7d 100%);
+            color: white;
+            border-radius: 16px;
+            padding: 35px;
+            margin-top: 20px;
+        }
+
+        .cross-analysis h3 {
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+        }
+
+        .cross-analysis h3::before {
+            content: '🔗';
+            margin-right: 10px;
+        }
+
+        .insight-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .insight-item {
+            display: flex;
+            align-items: flex-start;
+            padding: 15px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            transition: background 0.3s ease;
+        }
+
+        .insight-item:hover {
+            background: rgba(255,255,255,0.15);
+        }
+
+        .insight-item::before {
+            content: '→';
+            color: var(--accent);
+            font-weight: bold;
+            margin-right: 12px;
+            font-size: 1.2rem;
+        }
+
+        .insight-item p {
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+
+        .footer .logo {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .nav-tab {
+                padding: 12px 14px;
+                font-size: 0.85rem;
+            }
+
+            .section-title {
+                font-size: 1.4rem;
+            }
+
+            .data-cards {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .data-card .value {
+                font-size: 1.3rem;
+            }
+
+            .news-item {
+                padding: 18px;
+            }
+
+            .cross-analysis {
+                padding: 25px;
+            }
+        }
+
+        /* Print Styles */
+        @media print {
+            .nav-container {
+                display: none;
+            }
+            .section {
+                display: block !important;
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>全球新闻周报</h1>
+        <p class="subtitle">GLOBAL NEWS WEEKLY REPORT</p>
+        <p class="date">2026年3月10日 - 3月17日</p>
+    </header>
+
+    <nav class="nav-container">
+        <div class="nav-tabs">
+            <div class="nav-tab active" data-section="geopolitics">🌍 地缘政治</div>
+            <div class="nav-tab" data-section="us-market">🇺🇸 美国市场</div>
+            <div class="nav-tab" data-section="china-market">🇨🇳 中国市场</div>
+            <div class="nav-tab" data-section="sea-market">🌏 东南亚</div>
+            <div class="nav-tab" data-section="biopharma">💊 生物医药</div>
+            <div class="nav-tab" data-section="ai">🤖 AI行业</div>
+            <div class="nav-tab" data-section="analysis">📈 关联分析</div>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <!-- 地缘政治 -->
+        <section id="geopolitics" class="section active">
+            <div class="section-header">
+                <div class="section-number">01</div>
+                <h2 class="section-title">全球地缘政治</h2>
+            </div>
+
+            <div class="trend-box">
+                <h3>本周趋势</h3>
+                <p>美以对伊朗军事行动进入第三周，霍尔木兹海峡通行近乎瘫痪，全球能源供应受到严重冲击。美国外交政策交易化趋势持续重塑国际同盟格局，欧洲在安全防务上面临更大独立压力。</p>
+            </div>
+
+            <div class="news-list">
+                <div class="news-item">
+                    <h4>美以对伊朗战争持续升级</h4>
+                    <p>自2月28日"史诗之怒"行动（Operation Epic Fury）以来，美国与以色列对伊朗的联合军事行动已进入第三周。伊朗以导弹和无人机反击，霍尔木兹海峡船只通行近乎停滞。</p>
+                    <div class="impact">全球约20%原油供应受阻，能源市场剧烈波动，亚洲能源进口国承压最重。</div>
+                </div>
+
+                <div class="news-item">
+                    <h4>油价飙升冲击全球经济</h4>
+                    <p>布伦特原油一度飙升至近120美元/桶，目前在100美元附近震荡，战前约为70美元。IMF警告若战争持续将引发全球通胀风险，可能导致部分国家陷入滞胀。</p>
+                    <div class="impact">能源价格上涨压缩美联储降息空间，部分经济学家开始讨论加息可能性。</div>
+                </div>
+
+                <div class="news-item">
+                    <h4>中美筹备元首峰会</h4>
+                    <p>美财长贝森特于3月15-16日在法国与中国副总理何立峰会面，为计划中的特朗普-习近平北京峰会铺路。双方就贸易、关税和经济合作进行了初步磋商。</p>
+                    <div class="impact">若峰会成功举行，可能缓解中美贸易紧张关系，对港股和人民币形成支撑。</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 美国市场 -->
+        <section id="us-market" class="section">
+            <div class="section-header">
+                <div class="section-number">02</div>
+                <h2 class="section-title">金融市场 — 美国</h2>
+            </div>
+
+            <div class="data-cards">
+                <div class="data-card">
+                    <div class="label">道琼斯指数</div>
+                    <div class="value">46,946</div>
+                    <div class="change positive">+0.83%</div>
+                </div>
+                <div class="data-card">
+                    <div class="label">标普500</div>
+                    <div class="value">6,699</div>
+                    <div class="change positive">+1.01%</div>
+                </div>
+                <div class="data-card">
+                    <div class="label">纳斯达克</div>
+                    <div class="value">22,374</div>
+                    <div class="change positive">+1.22%</div>
+                </div>
+                <div class="data-card">
+                    <div class="label">WTI原油</div>
+                    <div class="value">$100+</div>
+                    <div class="change negative">战前$70</div>
+                </div>
+            </div>
+
+            <div class="trend-box">
+                <h3>本周趋势</h3>
+                <p>标普500此前连续三周下跌创2026年新低，周一强势反弹。市场情绪高度依赖伊朗战争进展和油价走势，美联储本周议息会议预计维持利率不变。</p>
+            </div>
+
+            <div class="news-list">
+                <div class="news-item">
+                    <h4>三大指数周一强势反弹</h4>
+                    <p>道指收涨388点（+0.83%），标普500涨1.01%至6,699.38点，纳斯达克涨1.22%至22,374.18点。此前标普500连续三周下跌创2026年新低。</p>
+                    <div class="impact">市场情绪高度依赖伊朗战争进展，任何停火迹象都可能引发显著反弹。</div>
+                </div>
+
+                <div class="news-item">
+                    <h4>美联储预计维持利率不变</h4>
+                    <p>CME FedWatch显示3月18日议息会议维持利率3.5%-3.75%概率达99%。能源价格上涨导致部分经济学家认为2026年可能不会降息，甚至讨论加息可能性。</p>
+                    <div class="impact">利率维持高位将继续对成长股估值形成压力，利好银行和保险板块。</div>
+                </div>
+
+                <div class="news-item">
+                    <h4>英伟达GTC提振科技股</h4>
+                    <p>英伟达GTC 2026大会（3月16-19日）在圣何塞开幕，CEO黄仁勋发表主题演讲。分析师维持乐观评级，英伟达股价周一上涨超2.5%，带动科技板块领涨。</p>
+                    <div class="impact">AI基础设施需求持续强劲，为科技股提供了相对独立于地缘风险的支撑。</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 中国市场 -->
+        <section id="china-market" class="section">
+            <div class="section-header">
+                <div class="section-number">03</div>
+                <h2 class="section-title">金融市场 — 中国</h2>
+            </div>
+
+            <div class="data-cards">
+                <div class="data-card" style="border-top-color: #E94560;">
+                    <div class="label">恒生指数</div>
+                    <div class="value">25,834</div>
+                    <div class="change positive">+1.45%</div>
+                </div>
+                <div class="data-card" style="border-top-color: #E94560;">
+                    <div class="label">GDP目标</div>
+                    <div class="value">4.5-5%</div>
+                    <div class="change neutral">下调自5%</div>
+                </div>
+                <div class="data-card" style="border-top-color: #E94560;">
+                    <div class="label">货币政策</div>
+                    <div class="value">适度宽松</div>
+                    <div class="change neutral">降准降息工具</div>
+                </div>
+            </div>
+
+            <div class="trend-box">
+                <h3>本周趋势</h3>
+                <p>恒生指数连续三周下跌后于周一反弹，中国1-2月经济数据超预期提振市场信心。两会释放"适度宽松"货币政策信号，内需消费成为政策首要发力点。</p>
+            </div>
+
+            <div class="news-list">
+                <div class="news-item">
+                    <h4>恒指连续三周下跌后反弹</h4>
+                    <p>恒生指数周五收于25,466点，单周下跌1.1%，连续第三周走低。周一反弹368点至25,834点（+1.45%），受中国1-2月工业增加值和零售销售超预期提振。</p>
+                    <div class="impact">港股估值处于历史低位，政策支持若持续兑现将吸引外资回流。</div>
+                </div>
+
+                <div class="news-item">
+                    <h4>两会设定GDP目标4.5%-5%</h4>
+                    <p>2026年GDP增长目标从此前三年的5%下调至4.5%-5%，反映对外部压力和内部结构性挑战的务实评估。货币政策定调"适度宽松"，财政赤字率维持较高水平。</p>
+                    <div class="impact">目标下调有助于降低市场预期差，政策更具灵活性和可信度。</div>
+                </div>
+
+                <div class="news-item">
+                    <h4>内需消费成为政策首要任务</h4>
+                    <p>2500亿元超长期特别国债将用于消费品以旧换新，覆盖家电、汽车等领域。基础设施投资预计超7万亿元，聚焦新基建和城市更新。</p>
+                    <div class="impact">消费服务、家电、汽车板块有望直接受益，关注政策落地节奏。</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 东南亚市场 -->
+        <section id="sea-market" class="section">
+            <div class="section-header">
+                <div class="section-number">04</div>
+                <h2 class="section-title">金融市场 — 东南亚</h2>
+            </div>
+
+            <div class="data-cards">
+                <div class="data-card" style="border-top-color: #16A34A;">
+                    <div class="label">新加坡 STI</div>
+                    <div class="value">4,855</div>
+                    <div class="change positive">创历史新高</div>
+                </div>
+                <div class="data-card" style="border-top-color: #16A34A;">
+                    <div class="label">印尼 JCI</div>
+                    <div class="value">+27%</div>
+                    <div class="change positive">年同比领涨</div>
+                </div>
+                <div class="data-card" style="border-top-color: #E94560;">
+                    <div class="label">泰国 SET</div>
+                    <div class="value">-7.1%</div>
+                    <div class="change negative">年同比最弱</div>
+                </div>
+                <div class="data-card" style="border-top-color: #E94560;">
+                    <div class="label">菲律宾比索</div>
+                    <div class="value">59.5</div>
+                    <div class="change negative">兑1美元低位</div>
+                </div>
+            </div>
+
+            <div class="trend-box">
+                <h3>本周趋势</h3>
+                <p>区域市场表现分化明显。新加坡和印尼股市表现强劲，受益于避险资金流入和内需驱动。能源进口国（菲律宾、泰国）则承受油价上涨和货币贬值双重压力。</p>
+            </div>
+
+            <div class="news-list">
+                <div class="news-item">
+                    <h4>新加坡市场表现稳健</h4>
+                    <p>海峡时报指数（FSSTI）年内曾突破5,000点历史高位，当前收于4,855点附近。3月初散户净买入3.84亿新元，新加坡的金融中心避险属性持续吸引资金。</p>
+                    <div class="impact">银行股（DBS、OCBC、UOB）和REITs板块受益于利差扩大和避险需求。</div>
+                </div>
+
+                <div class="news-item">
+                    <h4>印尼市场领跑区域</h4>
+                    <p>印尼综合指数（JCI）年同比涨幅达27%，工业和金融板块领涨。未来三年企业盈利预计年均增长15%，是区域内增长潜力最大的市场。</p>
+                    <div class="impact">印尼庞大的内需市场和镍等资源优势为其提供结构性支撑。</div>
+                </div>
+
+                <div class="news-item">
+                    <h4>油价高企冲击能源进口国</h4>
+                    <p>亚洲新兴市场跌幅大于美股，反映其对能源危机的更大敞口。菲律宾柴油价格上涨38.6%，比索跌至59.5兑1美元低位，面临通胀和货币贬值双重压力。</p>
+                    <div class="impact">菲律宾央行可能被迫加息应对通胀，进一步抑制经济增长。</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 生物医药 -->
+        <section id="biopharma" class="section">
+            <div class="section-header">
+                <div class="section-number">05</div>
+                <h2 class="section-title">生物医药行业</h2>
+            </div>
+
+            <div class="trend-box">
+                <h3>本周趋势</h3>
+                <p>GLP-1药物竞争进入白热化阶段，礼来口服版药物即将获批与诺和诺德正面交锋。大型药企并购活动持续活跃以应对专利悬崖压力。FDA审批节奏因机构调整面临一定挑战。</p>
+            </div>
+
+            <div class="news-list">
+                <div class="news-item">
+                    <h4>礼来口服GLP-1药物有望3月获批</h4>
+                    <p>orforglipron获FDA"国家优先"审评凭证，预计3月获批。这将是首款口服非肽类GLP-1药物，与诺和诺德的口服Wegovy展开直接竞争。</p>
+                    <div class="impact">口服GLP-1市场预计到2030年占800亿美元肥胖药市场的20%，礼来有望显著扩大市场份额。</div>
+                </div>
+
+                <div class="news-item">
+                    <h4>生物医药并购持续活跃</h4>
+                    <p>Gilead以78亿美元收购Arcellx为年内最大交易，布局CAR-T细胞疗法。Servier收购Day One为第二大交易。2025年生物技术并购累计交易额（490亿美元）已超过2024年全年。</p>
+                    <div class="impact">大型药企通过并购补充管线，中小型创新药企估值有望获得支撑。</div>
+                </div>
+
+                <div class="news-item">
+                    <h4>FDA近期批准多项新药</h4>
+                    <p>BMS的Sotyktu于3月6日获批用于银屑病关节炎（PsA）适应症扩展。Ascendis的navepegritide于2月27日获加速批准用于软骨发育不全症（ACH）。创新药管线持续推进。</p>
+                    <div class="impact">FDA审批节奏保持稳定，为行业提供确定性，利好研发型药企。</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- AI行业 -->
+        <section id="ai" class="section">
+            <div class="section-header">
+                <div class="section-number">06</div>
+                <h2 class="section-title">AI行业动态</h2>
+            </div>
+
+            <div class="data-cards">
+                <div class="data-card" style="border-top-color: #7C3AED;">
+                    <div class="label">英伟达订单前景</div>
+                    <div class="value">$1万亿</div>
+                    <div class="change neutral">到2027年</div>
+                </div>
+                <div class="data-card" style="border-top-color: #7C3AED;">
+                    <div class="label">OpenAI年化收入</div>
+                    <div class="value">$250亿</div>
+                    <div class="change positive">全球领先</div>
+                </div>
+                <div class="data-card" style="border-top-color: #7C3AED;">
+                    <div class="label">Anthropic年化收入</div>
+                    <div class="value">$190亿</div>
+                    <div class="change positive">企业市场70%</div>
+                </div>
+            </div>
+
+            <div class="trend-box">
+                <h3>本周趋势</h3>
+                <p>英伟达GTC 2026成为本周AI行业焦点，万亿美元订单预期彰显AI基础设施需求韧性。Anthropic与美国国防部的法律纠纷引发行业关于AI伦理边界的广泛讨论。Agent AI成为2026年核心发展方向。</p>
+            </div>
+
+            <div class="news-list">
+                <div class="news-item">
+                    <h4>英伟达GTC发布Groq 3芯片</h4>
+                    <p>CEO黄仁勋宣布Blackwell和Vera Rubin系列到2027年订单预计达1万亿美元。Groq 3是英伟达收购Groq（200亿美元）后推出的首款推理专用处理器，性能较前代提升数倍。</p>
+                    <div class="impact">AI算力需求持续超预期，英伟达在数据中心市场的主导地位进一步巩固。</div>
+                </div>
+
+                <div class="news-item">
+                    <h4>Anthropic与国防部法律纠纷</h4>
+                    <p>美国国防部将Anthropic列为"供应链风险"，因其拒绝AI技术用于大规模监控和自主武器。超30名OpenAI和Google DeepMind员工（包括Jeff Dean）提交法庭文件支持Anthropic立场。</p>
+                    <div class="impact">此案可能成为AI伦理边界的标志性判例，影响行业未来与政府合作模式。</div>
+                </div>
+
+                <div class="news-item">
+                    <h4>Agent AI成为核心发展方向</h4>
+                    <p>Anthropic的MCP协议被称为"AI的USB-C"，已被OpenAI和Microsoft采用并捐赠给Linux基金会的Agentic AI Foundation。2026年将是智能体AI从演示走向实际应用的关键年。</p>
+                    <div class="impact">Agent AI生态系统快速成熟，企业级AI应用落地有望加速。</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 跨板块关联分析 -->
+        <section id="analysis" class="section">
+            <div class="section-header">
+                <div class="section-number">07</div>
+                <h2 class="section-title">跨板块关联分析</h2>
+            </div>
+
+            <div class="cross-analysis">
+                <h3>本周核心观点</h3>
+                <div class="insight-list">
+                    <div class="insight-item">
+                        <p>本周全球市场呈现高度联动的<strong>"地缘-能源-金融"传导链</strong>：美以对伊朗军事行动直接引爆能源市场，布伦特原油从战前约70美元飙升至100美元以上。</p>
+                    </div>
+                    <div class="insight-item">
+                        <p>能源价格飙升迅速传导至金融市场：<strong>美联储降息预期大幅收窄</strong>，从年初预计降息2-3次调整为可能全年不降息，甚至出现加息讨论。</p>
+                    </div>
+                    <div class="insight-item">
+                        <p>亚洲市场受冲击程度因能源依赖度不同而<strong>明显分化</strong>：能源进口国（菲律宾、泰国、日本、韩国）跌幅大于美股，而新加坡和印尼相对抗跌。</p>
+                    </div>
+                    <div class="insight-item">
+                        <p><strong>科技与AI板块在乱局中展现独立行情</strong>：英伟达GTC万亿订单预期为市场提供确定性，AI基础设施需求与地缘风险的相关性较低。</p>
+                    </div>
+                    <div class="insight-item">
+                        <p><strong>生物医药行业相对"隔离"于地缘动荡</strong>，并购活动和FDA审批继续主导走势，GLP-1竞争格局演进成为独立主线。</p>
+                    </div>
+                    <div class="insight-item">
+                        <p>中国两会政策信号（适度宽松货币政策 + 内需刺激）部分对冲了外部压力，港股在连跌后出现技术性反弹，但持续性需观察政策落地节奏。</p>
+                    </div>
+                    <div class="insight-item">
+                        <p><strong>投资建议</strong>：2026年开年面临"滞胀+地缘冲突"复杂环境，需在防御性资产（能源、公用事业、黄金）与成长性资产（AI、生物医药）间寻求平衡，密切关注伊朗战争进展和油价走势。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="logo">全球新闻周报</div>
+        <p>每周一早8点 · 精选全球六大板块重要资讯</p>
+        <p style="margin-top: 10px; opacity: 0.7;">2026年3月17日 · Powered by Claude AI</p>
+    </footer>
+
+    <script>
+        // Tab Navigation
+        document.querySelectorAll('.nav-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Remove active class from all tabs and sections
+                document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+
+                // Add active class to clicked tab and corresponding section
+                tab.classList.add('active');
+                const sectionId = tab.getAttribute('data-section');
+                document.getElementById(sectionId).classList.add('active');
+
+                // Scroll to top of content
+                window.scrollTo({ top: 200, behavior: 'smooth' });
+            });
+        });
+
+        // News item click effect
+        document.querySelectorAll('.news-item').forEach(item => {
+            item.addEventListener('click', () => {
+                item.style.borderLeftColor = item.style.borderLeftColor === 'rgb(30, 39, 97)' ? '#E94560' : '#1E2761';
+            });
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            const tabs = Array.from(document.querySelectorAll('.nav-tab'));
+            const activeIndex = tabs.findIndex(t => t.classList.contains('active'));
+
+            if (e.key === 'ArrowRight' && activeIndex < tabs.length - 1) {
+                tabs[activeIndex + 1].click();
+            } else if (e.key === 'ArrowLeft' && activeIndex > 0) {
+                tabs[activeIndex - 1].click();
+            }
+        });
+    </script>
+</body>
+</html>
